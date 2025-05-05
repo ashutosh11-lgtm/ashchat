@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ashu Chat</title>
+  <style>
+    #chat-box {
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 300px;
+      overflow-y: auto;
+      font-family: sans-serif;
+      margin-bottom: 10px;
+    }
+  </style>
+
+  <!-- Firebase v8 CDN -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+<body>
+
+  <h2>Welcome to Ashu Chat</h2>
+
+  <div id="chat-box"></div>
+
+  <input type="text" id="msgInput" placeholder="Type your message..." />
+  <button id="sendBtn">Send</button>
+
+  <script>
+    // 1. Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyDCo6_MdoSSET14eXeSL8i9PytcvxEHsws",
+      authDomain: "ashchat-fcdd9.firebaseapp.com",
+      databaseURL: "https://ashchat-fcdd9-default-rtdb.firebaseio.com",
+      projectId: "ashchat-fcdd9",
+      storageBucket: "ashchat-fcdd9.appspot.com",
+      messagingSenderId: "1043218017142",
+      appId: "1:1043218017142:web:59d587b789df39b4a86857",
+      measurementId: "G-H7XP62MX5S"
+    };
+
+    // 2. Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    // 3. Elements
+    const chatBox = document.getElementById('chat-box');
+    const msgInput = document.getElementById('msgInput');
+    const sendBtn = document.getElementById('sendBtn');
+
+    // 4. Send message
+    sendBtn.onclick = function () {
+      const msg = msgInput.value.trim();
+      if (msg !== '') {
+        database.ref('messages').push({ message: msg });
+        msgInput.value = '';
+      }
+    };
+
+    // 5. Load old messages
+    database.ref('messages').once('value', function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        const msg = childSnapshot.val().message;
+        const msgElement = document.createElement('p');
+        msgElement.textContent = msg;
+        chatBox.appendChild(msgElement);
+      });
+    });
+
+    // 6. Listen for new messages in real time
+    database.ref('messages').on('child_added', function(snapshot) {
+      const msg = snapshot.val().message;
+      const msgElement = document.createElement('p');
+      msgElement.textContent = msg;
+      chatBox.appendChild(msgElement);
+    });
+  </script>
+</body>
+</html>
