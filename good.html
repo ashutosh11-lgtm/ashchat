@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASHUTOSH - Portfolio</title>
+    <!-- Link to Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Animation for Fade-In Effect */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .hero, .hero-text, .hero img {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* Navbar Styles */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 50px;
+            z-index: 1000;
+        }
+
+        nav .logo {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #0077b5;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 100px 50px 50px; /* Adjusted padding to account for fixed navbar */
+            background-color: #333;
+            color: #fff;
+        }
+
+        .hero-text {
+            max-width: 50%;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-text .dynamic-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0077b5;
+        }
+
+        .hero-text .dynamic-text span {
+            opacity: 0;
+            animation: fadeInOut 6s infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0;
+            }
+            20%, 80% {
+                opacity: 1;
+            }
+        }
+
+        .hero-text .dynamic-text span:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .hero-text .dynamic-text span:nth-child(2) {
+            animation-delay: 2s;
+        }
+
+        .hero-text .dynamic-text span:nth-child(3) {
+            animation-delay: 4s;
+        }
+
+        .hero-text .signin-button {
+            background-color: #0077b5;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero-text .signin-button:hover {
+            background-color: #005f8a;
+        }
+
+        .hero img {
+            max-width: 40%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Social Links with Icons */
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            margin-right: 15px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #0077b5;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 50px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .services h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .service-item {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .service-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-item i {
+            font-size: 2rem;
+            color: #0077b5;
+            margin-bottom: 10px;
+        }
+
+        .service-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .service-item p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 50px;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        .projects h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .project-item img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-item img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 50px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .contact-form button {
+            background-color: #0077b5;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #005f8a;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer .social-links a {
+            color: #fff;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            color: #0077b5;
+        }
+
+        footer p {
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">Ashutosh</div>
+        <div>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero" id="home">
+        <div class="hero-text">
+            <h1>Hello Everyone!</h1>
+            <p>I'm a <span class="dynamic-text">
+                <span>Web Developer</span>
+                <span>YouTuber</span>
+                <span>UI Designer</span>
+            </span> with a passion for creating beautiful and functional websites and digital experiences.</p>
+            <!-- Sign In Button -->
+            <button class="signin-button">Sign In</button>
+            <div class="social-links">
+                <!-- GitHub -->
+                <a href="https://github.com/yourusername" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <!-- LinkedIn -->
+                <a href="https://linkedin.com/in/yourusername" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <!-- YouTube -->
+                <a href="https://youtube.com/yourchannel" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <!-- Twitter -->
+                <a href="https://twitter.com/yourusername" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+        </div>
+        <!-- Online Image from Unsplash -->
+        <img src="https://images.unsplash.com/photo-1536104968055-4d61aa56f46a?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Web Developer Image">
+    </div>
+
+    <!-- About Me Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>I am a passionate web developer with expertise in front-end and back-end technologies. I love creating user-friendly and visually appealing websites. My skills include:</p>
+            <ul>
+                <li>HTML, CSS, JavaScript</li>
+                <li>React, Node.js</li>
+                <li>UI/UX Design</li>
+                <li>Responsive Design</li>
+                <li>Version Control (Git)</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2>Services</h2>
+        <div class="services-grid">
+            <div class="service-item">
+                <i class="fab fa-html5"></i>
+                <h3>HTML</h3>
+                <p>Building the structure of websites using the latest HTML standards.</p>
+            </div>
+            <div class="service-item">
+                <i class="fab fa-css3-alt"></i>
+                <h3>CSS</h3>
+                <p>Styling websites with modern CSS techniques and frameworks.</p>
+            </div>
+            <div class="service-item">
+                <i class="fab fa-js"></i>
+                <h3>JavaScript</h3>
+                <p>Adding interactivity and dynamic features to websites.</p>
+            </div>
+            <div class="service-item">
+                <i class="fas fa-palette"></i>
+                <h3>UI/UX Design</h3>
+                <p>Designing user-friendly and visually appealing interfaces.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+            <div class="project-item">
+                <img src="https://via.placeholder.com/300" alt="Project 1">
+            </div>
+            <div class="project-item">
+                <img src="https://via.placeholder.com/300" alt="Project 2">
+            </div>
+            <div class="project-item">
+                <img src="https://via.placeholder.com/300" alt="Project 3">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Contact Me</h2>
+        <form class="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/yourusername" target="_blank">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/yourusername" target="_blank">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://youtube.com/yourchannel" target="_blank">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://twitter.com/yourusername" target="_blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+        <p>&copy; 2025 thank you. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
